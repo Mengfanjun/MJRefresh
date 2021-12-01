@@ -53,7 +53,6 @@ static NSBundle *mj_systemI18nBundle = nil;
 + (NSString *)mj_localizedStringForKey:(NSString *)key value:(NSString *)value
 {
     NSString *table = MJRefreshConfig.defaultConfig.i18nFilename;
-    
     // 如果没有缓存, 则走初始化逻辑
 //    if (mj_defaultI18nBundle == nil) {
 //        NSString *language = MJRefreshConfig.defaultConfig.languageCode;
@@ -63,7 +62,7 @@ static NSBundle *mj_systemI18nBundle = nil;
             language = [NSLocale preferredLanguages].firstObject;
         }
         NSBundle *bundle = MJRefreshConfig.defaultConfig.i18nBundle;
-        // 首先优先使用公共配置中的 i18nBundle, 如果为空则使用 mainBundle
+//        // 首先优先使用公共配置中的 i18nBundle, 如果为空则使用 mainBundle
         bundle = bundle ? bundle : NSBundle.mainBundle;
         // 按语言选取语言包
         NSString *i18nFolderPath = [bundle pathForResource:language ofType:@"lproj"];
@@ -72,9 +71,9 @@ static NSBundle *mj_systemI18nBundle = nil;
         mj_defaultI18nBundle = mj_defaultI18nBundle ? mj_defaultI18nBundle : NSBundle.mainBundle;
         
         // 获取 MJRefresh 自有的语言包
-        if (mj_systemI18nBundle == nil) {
+//        if (mj_systemI18nBundle == nil) {
             mj_systemI18nBundle = [self mj_defaultI18nBundleWithLanguage:language];
-        }
+//        }
 //    }
     // 首先在 MJRefresh 内置语言文件中寻找
     value = [mj_systemI18nBundle localizedStringForKey:key value:value table:nil];
