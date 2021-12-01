@@ -55,8 +55,9 @@ static NSBundle *mj_systemI18nBundle = nil;
     NSString *table = MJRefreshConfig.defaultConfig.i18nFilename;
     
     // 如果没有缓存, 则走初始化逻辑
-    if (mj_defaultI18nBundle == nil) {
-        NSString *language = MJRefreshConfig.defaultConfig.languageCode;
+//    if (mj_defaultI18nBundle == nil) {
+//        NSString *language = MJRefreshConfig.defaultConfig.languageCode;
+    NSString *language = [[NSUserDefaults standardUserDefaults] objectForKey:@"RWLanguageKey"];
         // 如果配置中没有配置语言
         if (!language) {
             language = [NSLocale preferredLanguages].firstObject;
@@ -74,7 +75,7 @@ static NSBundle *mj_systemI18nBundle = nil;
         if (mj_systemI18nBundle == nil) {
             mj_systemI18nBundle = [self mj_defaultI18nBundleWithLanguage:language];
         }
-    }
+//    }
     // 首先在 MJRefresh 内置语言文件中寻找
     value = [mj_systemI18nBundle localizedStringForKey:key value:value table:nil];
     // 然后在 MainBundle 对应语言文件中寻找
